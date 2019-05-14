@@ -3,17 +3,30 @@ import sys
 from tkinter import Tk
 from tkinter import *
 tkinter.NoDefaultRoot()
-
+import subprocess
+#from playsound import playsound
 #####################################################################################################
 # окно
-introduce= Tk()
+root=Tk()
+root.withdraw()
+introduce= Toplevel(root)
 
 introduce.geometry('1650x900')
 introduce.title("Добро пожаловать!")
 
+#winsound.PlaySound('song.wav', winsound.SND_ALIAS | winsound.SND_ASYNC)
+
+#PlaySound("Lindsey",SND_FILENAME)
+
+############## закрытие
+# def dest(event):
+#     root.destroy()
+#
+# introduce.bind('<Destroy>',dest)
+
 #########################################################################################
 
-canvas = Canvas(introduce, width=1650, height=900, bg='blue') # Холст. 0,0 - верхний левый угол.
+canvas = Canvas(introduce, width=1650, height=900, bg='green') # Холст. 0,0 - верхний левый угол.
 
 #photo=PhotoImage(file="lena.gif")
 #canvas.create_image(10, 10, image=photo, anchor=NW) # встроить изображение
@@ -22,7 +35,7 @@ canvas = Canvas(introduce, width=1650, height=900, bg='blue') # Холст. 0,0 
 #################################################################################
 # заголовок
 title=Label(introduce,text='Добро пожаловать! \n Что ботаем?')
-title.config(bg='blue',fg='white')
+title.config(bg='green',fg='white')
 title.config(font=('helvetica', 40, 'bold italic'))
 
 title_x=850
@@ -34,8 +47,15 @@ endx=title_x
 endy=400
 d=150
 
+def struct():
+    introduce.destroy()
+    subprocess.run(['python','game_step2.py'])
 
-structure = Button(introduce,text='Строение веществ', padx=10, pady=30)
+def sokr():
+    introduce.destroy()
+    subprocess.run(['python','stroka_aminok.py'])
+
+structure = Button(introduce,text='Строение аминокислот', padx=10, pady=30, command=struct)
 structure.pack(padx=20, pady=20)
 structure.config(cursor='hand2')
 structure.config(bd=8, relief=RAISED)
@@ -45,7 +65,7 @@ structure.config(font=('helvetica', 20, 'underline italic'))
 
 canvas.create_window(endx,endy, window=structure)
 
-cycle = Button(introduce,text='Циклы', padx=95, pady=30)
+cycle = Button(introduce,text='Сокращения аминокислот', padx=95, pady=30,command=sokr)
 cycle.pack(padx=20, pady=20)
 cycle.config(cursor='hand2')
 cycle.config(bd=8, relief=RAISED)
@@ -71,3 +91,6 @@ canvas.create_window(endx,endy+2*d, window=end)
 canvas.pack(expand=YES, fill=BOTH)
 
 introduce.mainloop()
+
+
+### Исправить баг с вываливанием при вводе неверного кол-ва 2 кнопка возвращения в меню 3 сделать статистику верных и неверных ответов в каждой из игр 4 Исправить пробллему с закрытием
