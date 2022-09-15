@@ -1,1 +1,1 @@
-# You can find helpfull instrument here.
+Game for learning of 20 human aminoacids. 
